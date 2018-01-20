@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "skeleton",
+    "slug": "skeleton",
+    "description": "Boiler plate app for React Native",
+    "sdkVersion": "23.0.0",
+    "privacy": "public",
+    "icon": "./skeleton.png",
+    "githubUrl": "https://github.com/cloudprogrammer/skeleton"
+  }
+}
