@@ -1,28 +1,40 @@
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import { NavBar } from '../components/header';
 import { Intro, Loading, LogIn, Register } from '../screens/intro';
-import { Friends } from '../screens/friends';
+import { Conversations, Chat, Invite } from '../screens/messages';
 import { Settings } from '../screens/settings';
 import { connectAlert } from '../components/alert';
 import Drawer from '../components/drawer';
 
-const FriendsNav = StackNavigator({
+const MessagesNav = StackNavigator({
   Friends: {
-    screen: Friends,
+    screen: connectAlert(Conversations),
     navigationOptions: props => ({
       header: headerProps => <NavBar {...headerProps} />,
-      title: 'Friends',
+      title: 'Converstations',
       headerLeft: (
         <TouchableOpacity onPress={() => props.screenProps.drawerNavigation.navigate('DrawerOpen')}>
           <View style={{ paddingLeft: 10, paddingRight: 20 }}>
-            <Ionicons name="md-menu" color="#fff" size={20} />
+            <Icon name="md-menu" color="#fff" size={20} />
           </View>
         </TouchableOpacity>
       ),
     }),
+  },
+  Chat: {
+    screen: connectAlert(Chat),
+    navigationOptions: {
+      header: headerProps => <NavBar {...headerProps} />,
+    },
+  },
+  Invite: {
+    screen: connectAlert(Invite),
+    navigationOptions: {
+      header: headerProps => <NavBar {...headerProps} />,
+    },
   },
 }, {
   headerMode: 'screen',
@@ -37,7 +49,7 @@ const SettingsNav = StackNavigator({
       headerLeft: (
         <TouchableOpacity onPress={() => props.screenProps.drawerNavigation.navigate('DrawerOpen')}>
           <View style={{ paddingLeft: 10, paddingRight: 20 }}>
-            <Ionicons name="md-menu" color="#fff" size={20} />
+            <Icon name="md-menu" color="#fff" size={20} />
           </View>
         </TouchableOpacity>
       ),
@@ -48,9 +60,9 @@ const SettingsNav = StackNavigator({
 });
 
 const MainNav = DrawerNavigator({
-  Friends: {
+  Messages: {
     screen: ({ navigation }) =>
-      <FriendsNav screenProps={{ drawerNavigation: navigation }} />,
+      <MessagesNav screenProps={{ drawerNavigation: navigation }} />,
   },
   Settings: {
     screen: ({ navigation }) =>
